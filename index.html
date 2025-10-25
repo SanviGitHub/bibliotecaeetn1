@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca Digital - E.E.T.N°1 Grand Bourg</title>
-    
-    <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -19,76 +15,70 @@
         }
 
         :root {
-            --primary: #0a0a0a;
+            --primary: #0f0f0f;
             --secondary: #ffffff;
-            --accent: #6366f1;
-            --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --dark-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            --card-bg: rgba(255, 255, 255, 0.98);
-            --text-gray: #6b7280;
-            --border: rgba(0, 0, 0, 0.1);
+            --accent: #5b63d8;
+            --accent-light: #8b92ff;
+            --accent-dark: #3b43a8;
+            --surface: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6c757d;
+            --border: rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #000000;
-            color: var(--primary);
-            position: relative;
+            font-family: 'Inter', sans-serif;
+            background: var(--secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Animated Background */
-        .background-wrapper {
+        .background-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            opacity: 0.15;
-        }
-
-        .background-wrapper::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite;
+                linear-gradient(to right, var(--border) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            will-change: transform;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Main Container */
         .app-container {
             width: 100%;
             min-height: 100vh;
-            background: var(--secondary);
             position: relative;
+            background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%);
         }
 
-        /* Header */
         header {
-            background: var(--dark-gradient);
-            color: var(--secondary);
-            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 32px;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        header.scrolled {
+            padding: 12px 32px;
+            box-shadow: var(--shadow-md);
         }
 
         nav {
@@ -102,89 +92,92 @@
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .logo-icon {
-            font-size: 2rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: float 3s ease-in-out infinite;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            transform: rotate(-5deg);
+            transition: var(--transition);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .logo-section:hover .logo-icon {
+            transform: rotate(0deg) scale(1.05);
         }
 
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
+            color: var(--text-primary);
             letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 8px;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--secondary);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
             position: relative;
-            transition: all 0.3s;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover {
+            color: var(--accent);
+            background: rgba(91, 99, 216, 0.08);
         }
 
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: var(--secondary);
+            color: var(--text-primary);
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 8px;
         }
 
-        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,248,248,0.95) 100%);
             padding: 80px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--secondary) 100%);
         }
 
-        .hero::before {
-            content: '';
+        .hero-decoration {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%);
-            animation: rotate 30s linear infinite;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            opacity: 0.05;
+            filter: blur(60px);
+            pointer-events: none;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .hero-decoration.top-left {
+            top: -150px;
+            left: -150px;
+        }
+
+        .hero-decoration.bottom-right {
+            bottom: -150px;
+            right: -150px;
         }
 
         .hero-content {
@@ -195,20 +188,19 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
-            margin-bottom: 10px;
-            background: var(--accent-gradient);
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: slideInDown 1s ease;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.6s ease forwards;
         }
 
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
+        @keyframes slideUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -216,37 +208,47 @@
         }
 
         .hero .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 5px;
-            animation: slideInUp 1s ease 0.2s both;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: slideUp 0.6s ease 0.1s forwards;
         }
 
         .hero .author {
-            font-size: 1rem;
+            font-size: 0.875rem;
             color: var(--accent);
-            font-style: italic;
-            margin-top: 10px;
-            animation: fadeIn 1s ease 0.4s both;
+            font-weight: 500;
+            margin-top: 8px;
+            opacity: 0;
+            animation: slideUp 0.6s ease 0.2s forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            opacity: 0;
+            animation: slideUp 0.6s ease 0.3s forwards;
         }
 
-        /* Search Section */
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
         .search-section {
             padding: 40px;
             background: var(--secondary);
@@ -261,19 +263,19 @@
 
         .search-box {
             width: 100%;
-            padding: 15px 50px 15px 20px;
+            padding: 16px 52px 16px 20px;
             border: 2px solid var(--border);
-            border-radius: 50px;
+            border-radius: 16px;
             font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s;
+            font-family: inherit;
+            transition: var(--transition);
             background: var(--secondary);
         }
 
         .search-box:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(91, 99, 216, 0.1);
         }
 
         .search-icon {
@@ -281,121 +283,89 @@
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-gray);
-            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            pointer-events: none;
         }
 
-        /* Filter Section - Horizontal Scrollable */
         .filter-section {
-            padding: 30px 40px;
-            background: linear-gradient(to bottom, var(--secondary), #fafafa);
+            padding: 24px 40px;
+            background: var(--secondary);
             position: sticky;
-            top: 76px;
+            top: 73px;
             z-index: 50;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border);
         }
 
         .filter-wrapper {
-            position: relative;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .filter-scroll-container {
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            padding: 10px 0;
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
 
-        .filter-scroll-container::-webkit-scrollbar {
-            height: 6px;
+        .filter-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .filter-scroll-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .filter-scroll-container::-webkit-scrollbar-thumb {
+        .filter-count {
             background: var(--accent);
-            border-radius: 10px;
+            color: var(--secondary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
         .filter-buttons {
             display: flex;
-            gap: 15px;
-            white-space: nowrap;
-            padding-bottom: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
-            padding: 12px 24px;
-            border: 2px solid transparent;
+            padding: 10px 20px;
+            border: 2px solid var(--border);
             background: var(--secondary);
-            border-radius: 50px;
+            border-radius: 12px;
             font-weight: 600;
+            font-size: 0.875rem;
             cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            font-family: 'Poppins', sans-serif;
+            font-family: inherit;
         }
 
         .filter-btn:hover {
+            background: var(--surface);
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-sm);
         }
 
         .filter-btn.active {
-            background: var(--accent-gradient);
+            background: var(--accent);
             color: var(--secondary);
             border-color: var(--accent);
         }
 
         .filter-btn i {
-            font-size: 1rem;
+            font-size: 0.875rem;
         }
 
-        /* Scroll Indicators */
-        .scroll-indicator {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--accent-gradient);
-            color: var(--secondary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 10;
-            transition: all 0.3s;
-        }
-
-        .scroll-indicator:hover {
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .scroll-left {
-            left: -20px;
-        }
-
-        .scroll-right {
-            right: -20px;
-        }
-
-        /* Content Section */
         .content-section {
             padding: 60px 40px;
-            background: #fafafa;
+            background: var(--surface);
             min-height: 60vh;
         }
 
@@ -404,193 +374,308 @@
             margin: 0 auto;
         }
 
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
         .section-title {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--primary);
+            color: var(--text-primary);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+            background: var(--secondary);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .view-btn {
+            padding: 8px 12px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .view-btn.active {
+            background: var(--accent);
+            color: var(--secondary);
         }
 
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            animation: fadeInGrid 0.5s ease;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
         }
 
-        @keyframes fadeInGrid {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .resources-list {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .resources-list.active {
+            display: flex;
+        }
+
+        .resources-grid.list-view {
+            display: none;
         }
 
         .resource-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s;
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
             cursor: pointer;
             position: relative;
-            overflow: hidden;
-        }
-
-        .resource-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .resource-card:hover::before {
-            transform: scaleX(1);
+            border: 1px solid var(--border);
+            transform: translateY(0);
         }
 
         .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .resource-card.list-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .resource-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         .resource-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 16px;
+            margin-bottom: 16px;
         }
 
         .resource-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--accent-gradient);
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--secondary);
-            font-size: 1.3rem;
+            font-size: 1.25rem;
+            flex-shrink: 0;
         }
 
         .resource-info {
             flex: 1;
+            min-width: 0;
         }
 
         .resource-category {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 4px;
         }
 
         .resource-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-top: 5px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
-        .resource-type {
-            display: inline-block;
-            padding: 5px 12px;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-top: 10px;
+        .resource-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
         }
 
-        /* Empty State */
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-item i {
+            font-size: 0.75rem;
+        }
+
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
-            color: var(--text-gray);
+            padding: 80px 20px;
+            color: var(--text-secondary);
         }
 
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.3;
+        .empty-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            background: var(--surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--border);
         }
 
-        /* Footer */
         footer {
-            background: var(--dark-gradient);
+            background: var(--primary);
             color: var(--secondary);
-            padding: 40px;
-            text-align: center;
+            padding: 60px 40px 40px;
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--accent-light);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            line-height: 1.8;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
         }
 
         .social-links {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 16px;
         }
 
-        .social-links a {
-            color: var(--secondary);
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--accent);
-            transform: scale(1.2);
-        }
-
-        /* Floating Action Button */
-        .fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 56px;
-            height: 56px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
+        .social-link {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--secondary);
-            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .fab-button {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            box-shadow: var(--shadow-lg);
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            z-index: 1000;
+            transition: var(--transition);
             opacity: 0;
-            transform: scale(0);
+            transform: scale(0.8) translateY(20px);
+            pointer-events: none;
         }
 
-        .fab.visible {
+        .fab-button.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
+            pointer-events: all;
         }
 
-        .fab:hover {
+        .fab-button:hover {
+            background: var(--accent-dark);
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
 
-        /* Responsive */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
         @media (max-width: 768px) {
             header {
-                padding: 15px 20px;
+                padding: 12px 20px;
             }
 
             .nav-links {
@@ -599,10 +684,11 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--primary);
+                background: var(--secondary);
                 flex-direction: column;
                 padding: 20px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                box-shadow: var(--shadow-lg);
+                border-top: 1px solid var(--border);
             }
 
             .nav-links.active {
@@ -613,12 +699,12 @@
                 display: block;
             }
 
-            .hero h1 {
-                font-size: 2rem;
+            .hero {
+                padding: 60px 20px;
             }
 
-            .hero {
-                padding: 50px 20px;
+            .stats-container {
+                gap: 20px;
             }
 
             .filter-section,
@@ -631,46 +717,47 @@
                 grid-template-columns: 1fr;
             }
 
-            .scroll-indicator {
-                display: none;
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .logo-text {
-                font-size: 1.2rem;
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
 
-        /* Loading Spinner */
-        .loading {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 3px solid var(--border);
-            border-radius: 50%;
-            border-top-color: var(--accent);
-            animation: spin 1s ease-in-out infinite;
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
 <body>
-    <div class="background-wrapper"></div>
+    <div class="background-pattern"></div>
     
     <div class="app-container">
-        <!-- Header -->
-        <header>
+        <header id="header">
             <nav>
                 <div class="logo-section">
-                    <i class="fas fa-book-open logo-icon"></i>
+                    <div class="logo-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
                     <span class="logo-text">Biblioteca Digital</span>
                 </div>
                 
@@ -687,111 +774,117 @@
             </nav>
         </header>
 
-        <!-- Hero Section -->
         <section class="hero" id="home">
+            <div class="hero-decoration top-left"></div>
+            <div class="hero-decoration bottom-right"></div>
             <div class="hero-content">
                 <h1>Biblioteca E.E.T.N°1</h1>
                 <p class="subtitle">De Grand Bourg, 1°4</p>
-                <p class="author">by Viana</p>
+                <p class="author">Desarrollado por Viana</p>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number" id="resourceCount">0</div>
+                        <div class="stat-label">Recursos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="categoryCount">0</div>
+                        <div class="stat-label">Categorías</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Disponible</div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Search Section -->
         <section class="search-section">
             <div class="search-container">
                 <input 
                     type="text" 
                     class="search-box" 
                     id="searchBox"
-                    placeholder="Buscar por nombre de archivo..."
-                    onkeyup="searchResources()"
+                    placeholder="Buscar recursos..."
+                    onkeyup="handleSearch()"
                 >
                 <i class="fas fa-search search-icon"></i>
             </div>
         </section>
 
-        <!-- Filter Section -->
         <section class="filter-section">
             <div class="filter-wrapper">
-                <div class="scroll-indicator scroll-left" onclick="scrollFilters('left')">
-                    <i class="fas fa-chevron-left"></i>
+                <div class="filter-header">
+                    <span class="filter-title">Filtrar por categoría</span>
+                    <span class="filter-count" id="filterCount">Todos</span>
                 </div>
-                <div class="scroll-indicator scroll-right" onclick="scrollFilters('right')">
-                    <i class="fas fa-chevron-right"></i>
+                <div class="filter-buttons" id="filterButtons">
+                    <button class="filter-btn active" onclick="filterBySubject('all')">
+                        <i class="fas fa-th"></i> Todos
+                    </button>
                 </div>
-                
-                <div class="filter-scroll-container" id="filterContainer">
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" onclick="filterBySubject('all')">
-                            <i class="fas fa-th"></i> Todos
+            </div>
+        </section>
+
+        <section class="content-section" id="resources">
+            <div class="content-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title">Recursos Disponibles</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="toggleView('grid')">
+                            <i class="fas fa-th"></i>
                         </button>
-                        <button class="filter-btn" onclick="filterBySubject('lenguaje')">
-                            <i class="fas fa-pen"></i> Lenguaje
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('musica')">
-                            <i class="fas fa-music"></i> Música
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('sociales')">
-                            <i class="fas fa-globe"></i> Ciencias Sociales
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('naturales')">
-                            <i class="fas fa-flask"></i> Ciencias Naturales
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('ingles')">
-                            <i class="fas fa-language"></i> Inglés
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('ciudadania')">
-                            <i class="fas fa-users"></i> Ciudadanía
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('matematicas')">
-                            <i class="fas fa-calculator"></i> Matemáticas
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('proc-tec')">
-                            <i class="fas fa-cogs"></i> Procedimientos Tecnológicos
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('sis-tec')">
-                            <i class="fas fa-microchip"></i> Sistemas Tecnológicos
-                        </button>
-                        <button class="filter-btn" onclick="filterBySubject('leng-tec')">
-                            <i class="fas fa-code"></i> Lenguaje Tecnológico
+                        <button class="view-btn" onclick="toggleView('list')">
+                            <i class="fas fa-list"></i>
                         </button>
                     </div>
                 </div>
+                <div class="resources-grid" id="resourcesGrid"></div>
+                <div class="resources-list" id="resourcesList"></div>
             </div>
         </section>
 
-        <!-- Content Section -->
-        <section class="content-section" id="resources">
-            <div class="content-wrapper">
-                <h2 class="section-title">Recursos Disponibles</h2>
-                <div class="resources-grid" id="resourcesGrid">
-                    <!-- Los recursos se cargarán dinámicamente -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
         <footer>
             <div class="footer-content">
-                <p>&copy; 2025 E.E.T.N°1 De Grand Bourg</p>
-                <p>Desarrollado por Viana</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                <div class="footer-section">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Biblioteca digital de la E.E.T.N°1 de Grand Bourg, proporcionando acceso a recursos educativos de calidad.</p>
                 </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <a href="#home">Inicio</a><br>
+                    <a href="#resources">Recursos</a><br>
+                    <a href="#about">Acerca de</a><br>
+                    <a href="#contact">Contacto</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>E.E.T.N°1 Grand Bourg<br>
+                    Buenos Aires, Argentina<br>
+                    biblioteca@eet1.edu.ar</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 E.E.T.N°1 De Grand Bourg | Desarrollado con ❤️ por Viana</p>
             </div>
         </footer>
     </div>
 
-    <!-- Floating Action Button -->
-    <div class="fab" id="fab" onclick="scrollToTop()">
+    <div class="fab-button" id="fabButton" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <div class="toast" id="toast"></div>
+
     <script>
-        // Recursos reales con enlaces
         const resources = [
             {
                 id: 1,
@@ -799,7 +892,9 @@
                 category: 'lenguaje',
                 type: 'PDF',
                 url: 'https://drive.google.com/file/d/1_0OGQUts_ONQ4bCXAmMVUtQ0EndIMLSi/view?usp=drivesdk',
-                icon: 'fa-file-pdf'
+                icon: 'fa-file-pdf',
+                size: '2.3 MB',
+                date: '2025'
             },
             {
                 id: 2,
@@ -807,7 +902,9 @@
                 category: 'musica',
                 type: 'PDF',
                 url: 'https://drive.google.com/file/d/1tb9xDZYojudKiNFrTlyQb4Wi62YiF2hZ/view?usp=drivesdk',
-                icon: 'fa-file-pdf'
+                icon: 'fa-file-pdf',
+                size: '1.8 MB',
+                date: '2025'
             },
             {
                 id: 3,
@@ -815,7 +912,9 @@
                 category: 'lenguaje',
                 type: 'PDF',
                 url: 'https://drive.google.com/file/d/1nIBWYuLbMC05WMnQJJCYjbEuoC_FzRoA/view?usp=drivesdk',
-                icon: 'fa-file-pdf'
+                icon: 'fa-file-pdf',
+                size: '3.1 MB',
+                date: '2025'
             },
             {
                 id: 4,
@@ -823,7 +922,9 @@
                 category: 'lenguaje',
                 type: 'PDF',
                 url: 'https://drive.google.com/file/d/1-i-_8Ug1pYbybUCaOdoXst7qq0LPzIhE/view?usp=drivesdk',
-                icon: 'fa-file-pdf'
+                icon: 'fa-file-pdf',
+                size: '2.7 MB',
+                date: '2025'
             },
             {
                 id: 5,
@@ -831,31 +932,39 @@
                 category: 'leng-tec',
                 type: 'PDF',
                 url: 'https://drive.google.com/file/d/1kauiTsQbtl5OvbWALMC1xfpadPxjFsKL/view?usp=drivesdk',
-                icon: 'fa-file-pdf'
+                icon: 'fa-file-pdf',
+                size: '4.2 MB',
+                date: '2025'
             },
             {
                 id: 6,
                 title: 'Proyecto Anual de Ciencias Sociales',
                 category: 'sociales',
                 type: 'Presentación',
-                url: 'https://docs.google.com/presentation/d/1d5yyggUPPkWhhgxhk-SU4CF_te-tMwjQ/edit?usp=drivesdk&ouid=112434637258054466007&rtpof=true&sd=true',
-                icon: 'fa-file-powerpoint'
+                url: 'https://docs.google.com/presentation/d/1d5yyggUPPkWhhgxhk-SU4CF_te-tMwjQ/edit',
+                icon: 'fa-file-powerpoint',
+                size: '5.5 MB',
+                date: '2025'
             },
             {
                 id: 7,
                 title: 'Género Dramático',
                 category: 'lenguaje',
                 type: 'Documento',
-                url: 'https://docs.google.com/document/d/10s2XQtplJPc-EdwAX4fFrkr_MQBBevPq/edit?usp=drivesdk&ouid=112434637258054466007&rtpof=true&sd=true',
-                icon: 'fa-file-word'
+                url: 'https://docs.google.com/document/d/10s2XQtplJPc-EdwAX4fFrkr_MQBBevPq/edit',
+                icon: 'fa-file-word',
+                size: '1.2 MB',
+                date: '2025'
             },
             {
                 id: 8,
                 title: 'Thiago Milessi - Poesía Lírica',
                 category: 'lenguaje',
                 type: 'Documento',
-                url: 'https://docs.google.com/document/d/1N09idrT_-frUtz44MZAD4AZziYfz-tj_/edit?usp=drivesdk&ouid=112434637258054466007&rtpof=true&sd=true',
-                icon: 'fa-file-word'
+                url: 'https://docs.google.com/document/d/1N09idrT_-frUtz44MZAD4AZziYfz-tj_/edit',
+                icon: 'fa-file-word',
+                size: '980 KB',
+                date: '2025'
             },
             {
                 id: 9,
@@ -863,7 +972,9 @@
                 category: 'ingles',
                 type: 'PDF',
                 url: 'https://drive.google.com/file/d/1daYDkJGPd7r8qbMiWpu4QgXCS8hlfhSw/view?usp=drivesdk',
-                icon: 'fa-file-pdf'
+                icon: 'fa-file-pdf',
+                size: '3.4 MB',
+                date: '2025'
             },
             {
                 id: 10,
@@ -871,7 +982,9 @@
                 category: 'lenguaje',
                 type: 'Imagen',
                 url: 'https://share.google/images/ENsL7TC4PBXCPO5Oo',
-                icon: 'fa-image'
+                icon: 'fa-image',
+                size: '750 KB',
+                date: '2025'
             },
             {
                 id: 11,
@@ -879,187 +992,258 @@
                 category: 'ciudadania',
                 type: 'PDF',
                 url: 'https://drive.google.com/file/d/16ugqsyn2972ITsTMIhe2BeEKCGzXhJYJ/view?usp=drivesdk',
-                icon: 'fa-file-pdf'
+                icon: 'fa-file-pdf',
+                size: '2.9 MB',
+                date: '2025'
             }
         ];
 
-        const categoryNames = {
-            'lenguaje': 'Prácticas del Lenguaje',
-            'musica': 'Música',
-            'sociales': 'Ciencias Sociales',
-            'naturales': 'Ciencias Naturales',
-            'ingles': 'Inglés',
-            'ciudadania': 'Ciudadanía',
-            'matematicas': 'Matemáticas',
-            'proc-tec': 'Procedimientos Tecnológicos',
-            'sis-tec': 'Sistemas Tecnológicos',
-            'leng-tec': 'Lenguaje Tecnológico'
+        const categories = {
+            'lenguaje': { name: 'Prácticas del Lenguaje', icon: 'fa-pen' },
+            'musica': { name: 'Música', icon: 'fa-music' },
+            'sociales': { name: 'Ciencias Sociales', icon: 'fa-globe' },
+            'naturales': { name: 'Ciencias Naturales', icon: 'fa-flask' },
+            'ingles': { name: 'Inglés', icon: 'fa-language' },
+            'ciudadania': { name: 'Ciudadanía', icon: 'fa-users' },
+            'matematicas': { name: 'Matemáticas', icon: 'fa-calculator' },
+            'proc-tec': { name: 'Procedimientos Tecnológicos', icon: 'fa-cogs' },
+            'sis-tec': { name: 'Sistemas Tecnológicos', icon: 'fa-microchip' },
+            'leng-tec': { name: 'Lenguaje Tecnológico', icon: 'fa-code' }
         };
 
         let currentFilter = 'all';
         let searchTerm = '';
+        let currentView = 'grid';
 
-        // Mostrar recursos
+        function initApp() {
+            renderFilterButtons();
+            updateStats();
+            displayResources();
+            setupEventListeners();
+        }
+
+        function renderFilterButtons() {
+            const container = document.getElementById('filterButtons');
+            const existingCategories = [...new Set(resources.map(r => r.category))];
+            
+            Object.entries(categories).forEach(([key, value]) => {
+                if (existingCategories.includes(key)) {
+                    const btn = document.createElement('button');
+                    btn.className = 'filter-btn';
+                    btn.onclick = () => filterBySubject(key);
+                    btn.innerHTML = `<i class="fas ${value.icon}"></i> ${value.name}`;
+                    container.appendChild(btn);
+                }
+            });
+        }
+
+        function updateStats() {
+            const resourceCount = document.getElementById('resourceCount');
+            const categoryCount = document.getElementById('categoryCount');
+            
+            animateNumber(resourceCount, resources.length);
+            animateNumber(categoryCount, [...new Set(resources.map(r => r.category))].length);
+        }
+
+        function animateNumber(element, target) {
+            let current = 0;
+            const increment = target / 30;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 30);
+        }
+
         function displayResources(filter = 'all', search = '') {
-            const grid = document.getElementById('resourcesGrid');
-            grid.innerHTML = '';
+            const gridContainer = document.getElementById('resourcesGrid');
+            const listContainer = document.getElementById('resourcesList');
             
-            let filteredResources = resources;
+            let filtered = resources;
             
-            // Filtrar por categoría
             if (filter !== 'all') {
-                filteredResources = resources.filter(r => r.category === filter);
+                filtered = resources.filter(r => r.category === filter);
             }
             
-            // Filtrar por búsqueda
             if (search) {
-                filteredResources = filteredResources.filter(r => 
-                    r.title.toLowerCase().includes(search.toLowerCase())
+                filtered = filtered.filter(r => 
+                    r.title.toLowerCase().includes(search.toLowerCase()) ||
+                    categories[r.category].name.toLowerCase().includes(search.toLowerCase())
                 );
             }
             
-            if (filteredResources.length === 0) {
-                grid.innerHTML = `
+            gridContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                const emptyState = `
                     <div class="empty-state" style="grid-column: 1 / -1;">
-                        <i class="fas fa-search"></i>
+                        <div class="empty-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
                         <h3>No se encontraron recursos</h3>
                         <p>Intenta con otra búsqueda o categoría</p>
                     </div>
                 `;
+                gridContainer.innerHTML = emptyState;
+                listContainer.innerHTML = emptyState;
                 return;
             }
             
-            filteredResources.forEach((resource, index) => {
-                const card = document.createElement('div');
-                card.className = 'resource-card';
-                card.style.animationDelay = `${index * 0.05}s`;
+            filtered.forEach((resource, index) => {
+                const cardHTML = createResourceCard(resource, index);
+                gridContainer.insertAdjacentHTML('beforeend', cardHTML);
                 
-                card.innerHTML = `
+                const listHTML = createResourceListItem(resource, index);
+                listContainer.insertAdjacentHTML('beforeend', listHTML);
+            });
+            
+            document.getElementById('filterCount').textContent = 
+                filter === 'all' ? 'Todos' : `${filtered.length} recursos`;
+        }
+
+        function createResourceCard(resource, index) {
+            return `
+                <div class="resource-card" onclick="openResource('${resource.url}')" style="animation-delay: ${index * 0.05}s">
+                    ${resource.type === 'PDF' ? '<div class="resource-badge">PDF</div>' : ''}
                     <div class="resource-header">
                         <div class="resource-icon">
                             <i class="fas ${resource.icon}"></i>
                         </div>
                         <div class="resource-info">
-                            <div class="resource-category">${categoryNames[resource.category]}</div>
+                            <div class="resource-category">${categories[resource.category].name}</div>
                             <div class="resource-title">${resource.title}</div>
                         </div>
                     </div>
-                    <span class="resource-type">${resource.type}</span>
-                `;
-                
-                card.onclick = () => {
-                    window.open(resource.url, '_blank');
-                };
-                
-                grid.appendChild(card);
-            });
+                    <div class="resource-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-file"></i>
+                            <span>${resource.type}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-weight"></i>
+                            <span>${resource.size}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
-        // Filtrar por materia
+        function createResourceListItem(resource, index) {
+            return `
+                <div class="resource-card list-item" onclick="openResource('${resource.url}')" style="animation-delay: ${index * 0.05}s">
+                    <div class="resource-icon">
+                        <i class="fas ${resource.icon}"></i>
+                    </div>
+                    <div class="resource-info">
+                        <div class="resource-category">${categories[resource.category].name}</div>
+                        <div class="resource-title">${resource.title}</div>
+                    </div>
+                    <div class="resource-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-file"></i>
+                            <span>${resource.type}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-weight"></i>
+                            <span>${resource.size}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         function filterBySubject(subject) {
             currentFilter = subject;
             
-            // Actualizar botones activos
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.closest('.filter-btn').classList.add('active');
             
-            // Mostrar recursos filtrados
             displayResources(subject, searchTerm);
         }
 
-        // Buscar recursos
-        function searchResources() {
+        function handleSearch() {
             searchTerm = document.getElementById('searchBox').value;
             displayResources(currentFilter, searchTerm);
         }
 
-        // Scroll horizontal de filtros
-        function scrollFilters(direction) {
-            const container = document.getElementById('filterContainer');
-            const scrollAmount = 200;
+        function toggleView(view) {
+            currentView = view;
+            const gridContainer = document.getElementById('resourcesGrid');
+            const listContainer = document.getElementById('resourcesList');
             
-            if (direction === 'left') {
-                container.scrollLeft -= scrollAmount;
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.view-btn').classList.add('active');
+            
+            if (view === 'grid') {
+                gridContainer.classList.remove('list-view');
+                listContainer.classList.remove('active');
             } else {
-                container.scrollLeft += scrollAmount;
+                gridContainer.classList.add('list-view');
+                listContainer.classList.add('active');
             }
         }
 
-        // Toggle menú móvil
+        function openResource(url) {
+            window.open(url, '_blank');
+            showToast('Abriendo recurso...');
+        }
+
         function toggleMenu() {
             const navMenu = document.getElementById('navMenu');
             navMenu.classList.toggle('active');
         }
 
-        // Scroll to top
         function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function setupEventListeners() {
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                const fab = document.getElementById('fabButton');
+                
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                if (window.scrollY > 300) {
+                    fab.classList.add('visible');
+                } else {
+                    fab.classList.remove('visible');
+                }
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
             });
         }
 
-        // Mostrar/ocultar FAB
-        window.addEventListener('scroll', () => {
-            const fab = document.getElementById('fab');
-            if (window.pageYOffset > 300) {
-                fab.classList.add('visible');
-            } else {
-                fab.classList.remove('visible');
-            }
-        });
-
-        // Smooth scroll para links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Inicializar
-        window.addEventListener('DOMContentLoaded', () => {
-            displayResources('all');
-            
-            // Detectar scroll en filtros para mostrar/ocultar indicadores
-            const filterContainer = document.getElementById('filterContainer');
-            const updateScrollIndicators = () => {
-                const scrollLeft = document.querySelector('.scroll-left');
-                const scrollRight = document.querySelector('.scroll-right');
-                
-                if (filterContainer.scrollLeft > 0) {
-                    scrollLeft.style.display = 'flex';
-                } else {
-                    scrollLeft.style.display = 'none';
-                }
-                
-                if (filterContainer.scrollLeft < filterContainer.scrollWidth - filterContainer.clientWidth - 10) {
-                    scrollRight.style.display = 'flex';
-                } else {
-                    scrollRight.style.display = 'none';
-                }
-            };
-            
-            filterContainer.addEventListener('scroll', updateScrollIndicators);
-            updateScrollIndicators();
-        });
-
-    
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-        });
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-  </html>
+</html>
